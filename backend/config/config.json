@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "matosbolado12",
+    "database": "barber_shop_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "matosbolado12",
+    "database": "barber_shop_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "matosbolado12",
+    "database": "barber_shop_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
