@@ -24,3 +24,12 @@ export const fetchAppointments = async () => {
 export const createAppointment = async (appointmentData) => {
   await axios.post(`${API_URL}/appointments`, appointmentData);
 };
+
+export const fetchClients = async () => {
+  const response = await axios.get(`${API_URL}/clients`);
+  return response.data;
+};
+
+export const createBarber = async (barberData) => {
+  await axios.post(`${API_URL}/barbers`, barberData);
+};

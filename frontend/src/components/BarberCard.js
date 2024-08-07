@@ -8,7 +8,9 @@ const BarberCard = ({ barber }) => {
         <Card.Title>{barber.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Idade: {barber.age}</Card.Subtitle>
         <Card.Text>
-          Especialidades: {barber.specialties.map(s => s.name).join(', ')}
+          Especialidades: {barber.specialties && barber.specialties.length > 0
+            ? barber.specialties.join(', ')
+            : 'Nenhuma especialidade'}
         </Card.Text>
       </Card.Body>
     </Card>

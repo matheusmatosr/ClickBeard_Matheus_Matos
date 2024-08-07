@@ -6,7 +6,7 @@ const Footer = () => (
   <footer className="footer">
     <Container>
       <Typography variant="body2" align="center">
-        &copy; {new Date().getFullYear()} Barber Shop Scheduler
+        &copy; {new Date().getFullYear()} by Matheus Matos
       </Typography>
     </Container>
   </footer>
