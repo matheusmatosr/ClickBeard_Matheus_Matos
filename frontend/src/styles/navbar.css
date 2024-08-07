@@ -1,0 +1,30 @@
+.custom-navbar {
+  background-color: #343a40;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: #ffffff !important;
+}
+
+.custom-navbar .navbar-brand:hover,
+.custom-navbar .nav-link:hover {
+  color: #ffdd57 !important; 
+}
+
+.custom-navbar .navbar-toggler-icon {
+  filter: invert(1); 
+}
+
+
+.footer {
+  background-color: #343a40; 
+  color: #ffffff; 
+  padding: 1rem 0;
+  text-align: center;
+  display: flex;
+  position: relative;
+  width: 100%;
+
+}
+
