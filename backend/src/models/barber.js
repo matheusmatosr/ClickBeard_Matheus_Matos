@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     age: DataTypes.INTEGER,
     hireDate: DataTypes.DATE,
-    specialties: DataTypes.ARRAY(DataTypes.STRING),
+    specialties: DataTypes.JSON, // Alterado para JSON
   });
 
   Barber.associate = models => {

@@ -63,7 +63,7 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Error creating barber:', error);
     }
-  };
+  };  
 
   return (
     <div className="container">

@@ -3,7 +3,13 @@ const { Barber } = require('../models');
 exports.createBarber = async (req, res) => {
   try {
     const { name, age, hireDate, specialties } = req.body;
-    const barber = await Barber.create({ name, age, hireDate, specialties });
+    // Verifique se specialties é um array
+    const barber = await Barber.create({
+      name,
+      age,
+      hireDate,
+      specialties: Array.isArray(specialties) ? specialties : [], // Garante que é um array
+    });
     res.status(201).json(barber);
   } catch (error) {
     console.error(error);
