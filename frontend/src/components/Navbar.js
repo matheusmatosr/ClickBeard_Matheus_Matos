@@ -15,21 +15,21 @@ const Navbar = () => {
   return (
     <BootstrapNavbar expand="lg" className="custom-navbar mb-5">
       <Container>
-        <BootstrapNavbar.Brand as={Link} to="/" className="m-2">Mestre dos Penteados</BootstrapNavbar.Brand>
+        <BootstrapNavbar.Brand as={Link} to="/" className="m-2" style={{color:"#fff"}}>Mestre dos Penteados</BootstrapNavbar.Brand>
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {isAuthenticated ? (
               <>
-                <Nav.Link as={Link} to="/book-appointment">Agendar</Nav.Link>
-                <Nav.Link as={Link} to="/view-appointments">Meus Agendamentos</Nav.Link>
-                <Nav.Link as={Link} to="/admin-dashboard">Admin Dashboard</Nav.Link>
-                <Nav.Link onClick={handleLogout}>Sair</Nav.Link>
+                <Nav.Link as={Link} style={{color:"#fff"}} to="/book-appointment">Agendar</Nav.Link>
+                <Nav.Link as={Link} style={{color:"#fff"}} to="/view-appointments">Meus Agendamentos</Nav.Link>
+                <Nav.Link as={Link} style={{color:"#fff"}} to="/admin-dashboard">Admin Dashboard</Nav.Link>
+                <Nav.Link onClick={handleLogout} style={{color:"#fff"}}>Sair</Nav.Link>
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <Nav.Link as={Link} to="/register">Registrar</Nav.Link>
+                <Nav.Link as={Link} style={{color:"#fff"}} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} style={{color:"#fff"}} to="/register">Registrar</Nav.Link>
               </>
             )}
           </Nav>

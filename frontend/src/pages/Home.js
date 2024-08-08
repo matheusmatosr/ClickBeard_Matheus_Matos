@@ -17,8 +17,8 @@ const Home = () => {
 
   return (
     <Container>
-      <div className="p-5 mb-4 bg-light rounded-3 shadow mb-4">
-        <div className="container-fluid py-5">
+      <div className="p-5 mb-4 rounded-3 shadow mb-4" style={{backgroundColor:"#134647"}}>
+        <div className="container-fluid py-5" style={{color:"#fff"}}>
           <h1 className="display-5 fw-bold">Bem-vindo a barbearia Mestre dos Penteados</h1>
           <p className="col-md-8 fs-4">Agende seu horário com os melhores barbeiros da cidade!</p>
         </div>

@@ -1,12 +1,13 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
+import { Container } from 'react-bootstrap';
 
 const Login = () => {
   return (
-    <div className="container">
+    <Container>
       <h2>Login</h2>
       <LoginForm />
-    </div>
+    </Container>
   );
 };
 
