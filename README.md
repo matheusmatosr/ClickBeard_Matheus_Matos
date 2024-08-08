@@ -31,7 +31,7 @@ npm install
 
 3. Crie o arquivo .env na raiz da pasta backend, substitua pelos seus dados do banco PgAdmin em DB_USER e DB_PASSWORD:
 ```bash
-PORT=3000
+PORT=3001
 DB_NAME=barber_shop_db
 DB_USER='seu_usuario'
 DB_PASSWORD='sua_senha'
