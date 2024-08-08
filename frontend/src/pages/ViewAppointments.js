@@ -29,8 +29,8 @@ const ViewAppointments = () => {
           {appointments.map((appointment) => (
             <tr key={appointment.id}>
               <td>{new Date(appointment.date).toLocaleString()}</td>
-              <td>{appointment.Barber.name}</td>
-              <td>{appointment.Barber.specialties.join(', ')}</td>
+              <td>{appointment.Barber ? appointment.Barber.name : 'N/A'}</td>
+              <td>{appointment.Barber ? appointment.Barber.specialties.join(', ') : 'N/A'}</td>
               <td>{appointment.status}</td>
             </tr>
           ))}
