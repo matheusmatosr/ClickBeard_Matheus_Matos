@@ -10,5 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Appointment.associate = (models) => {
+    Appointment.belongsTo(models.Barber, { foreignKey: 'barberId' });
+    Appointment.belongsTo(models.Client, { foreignKey: 'clientId' });
+  };
+
   return Appointment;
 };

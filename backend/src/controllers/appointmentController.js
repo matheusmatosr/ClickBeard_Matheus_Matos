@@ -1,4 +1,5 @@
 const { Appointment, Barber, Client } = require('../models');
+const { Op } = require('sequelize');  
 
 exports.createAppointment = async (req, res) => {
   try {
@@ -14,25 +15,29 @@ exports.createAppointment = async (req, res) => {
       return res.status(404).json({ error: 'Client not found' });
     }
 
-    console.log('Barber specialties:', barber.specialties);
+    // Verifica se o horário já está ocupado
+    const existingAppointment = await Appointment.findOne({
+      where: {
+        barberId,
+        date: {
+          [Op.between]: [
+            new Date(new Date(date).getTime() - 30 * 60 * 1000), // 30 minutos antes
+            new Date(new Date(date).getTime() + 30 * 60 * 1000)  // 30 minutos depois
+          ]
+        }
+      }
+    });
 
-    const barberSpecialties = barber.specialties || [];
-    const specialtyExists = barberSpecialties.includes(specialty);
-
-    if (!specialtyExists) {
-      return res.status(404).json({ error: 'Barber does not have this specialty' });
+    if (existingAppointment) {
+      return res.status(400).json({ error: 'Barber is already booked at this time' });
     }
 
-    const appointmentExists = await Appointment.findOne({ where: { barberId, date } });
-    if (appointmentExists) {
-      return res.status(400).json({ error: 'Appointment already exists at this time' });
-    }
-    
-    const appointment = await Appointment.create({ barberId, clientId, date, status: 'Scheduled' });
+    // Cria o novo agendamento
+    const appointment = await Appointment.create({ barberId, clientId, date, status: 'Agendado' });
 
     res.status(201).json(appointment);
   } catch (error) {
-    console.error('Error creating appointment:', error);
+    console.error(error); 
     res.status(500).json({ error: 'Error creating appointment' });
   }
 };
@@ -42,8 +47,7 @@ exports.getAppointments = async (req, res) => {
     const appointments = await Appointment.findAll({ include: [Barber, Client] });
     res.status(200).json(appointments);
   } catch (error) {
-    console.error('Error fetching appointments:', error);
-    res.status(500).json({ error: 'Error fetching appointments' });
+    res.status(500).json({ error: 'Erro ao buscar agendamentos' });
   }
 };
 
@@ -53,7 +57,7 @@ exports.cancelAppointment = async (req, res) => {
     const appointment = await Appointment.findByPk(id);
 
     if (!appointment) {
-      return res.status(404).json({ error: 'Appointment not found' });
+      return res.status(404).json({ error: 'Agendamento não encontrado' });
     }
 
     const currentDate = new Date();
@@ -61,7 +65,7 @@ exports.cancelAppointment = async (req, res) => {
     const hoursDifference = (appointmentDate - currentDate) / (1000 * 60 * 60);
 
     if (hoursDifference < 2) {
-      return res.status(400).json({ error: 'Cannot cancel appointment within 2 hours' });
+      return res.status(400).json({ error: 'Não é possível cancelar o agendamento com menos de 2 horas de antecedência' });
     }
 
     appointment.status = 'Cancelled';
@@ -69,7 +73,6 @@ exports.cancelAppointment = async (req, res) => {
 
     res.status(200).json(appointment);
   } catch (error) {
-    console.error('Error cancelling appointment:', error);
-    res.status(500).json({ error: 'Error cancelling appointment' });
+    res.status(500).json({ error: 'Erro ao cancelar o agendamento' });
   }
 };

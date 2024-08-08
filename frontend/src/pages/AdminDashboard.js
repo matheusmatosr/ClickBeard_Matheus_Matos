@@ -97,7 +97,7 @@ const AdminDashboard = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Especialiades</Form.Label>
+              <Form.Label>Especialidades</Form.Label>
               <Form.Control
                 type="text"
                 name="specialties"
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Data</Form.Label>
+              <Form.Label>Data de contratação</Form.Label>
               <Form.Control
                 type="date"
                 name="hireDate"
@@ -127,25 +127,25 @@ const AdminDashboard = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Barber</th>
-            <th>Specialty</th>
-            <th>Client</th>
+            <th>Data</th>
+            <th>Barbeiro</th>
+            <th>Especialidade</th>
+            <th>Cliente</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>
           {appointments.map((appointment) => (
             <tr key={appointment.id}>
               <td>{new Date(appointment.date).toLocaleString()}</td>
-              <td>{appointment.barber.name}</td>
-              <td>{appointment.specialty}</td>
-              <td>{appointment.client.name}</td>
+              <td>{appointment.Barber ? appointment.Barber.name : 'N/A'}</td>
+              <td>{appointment.Barber && appointment.Barber.specialties ? appointment.Barber.specialties.join(', ') : 'N/A'}</td>
+              <td>{appointment.Client ? appointment.Client.name : 'N/A'}</td>
               <td>{appointment.status}</td>
               <td>
                 <Button variant="danger" onClick={() => handleCancel(appointment.id)}>
-                  Cancel
+                  Cancelar
                 </Button>
               </td>
             </tr>
@@ -157,7 +157,7 @@ const AdminDashboard = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Nome</th>
             <th>Email</th>
           </tr>
         </thead>
@@ -175,10 +175,10 @@ const AdminDashboard = () => {
       <Table striped bordered hover className="mb-5">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Specialties</th>
-            <th>Hire Date</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Especialidades</th>
+            <th>Data de contratação</th>
           </tr>
         </thead>
         <tbody>

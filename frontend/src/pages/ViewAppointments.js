@@ -19,9 +19,9 @@ const ViewAppointments = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Barber</th>
-            <th>Specialty</th>
+            <th>Data</th>
+            <th>Barbeiro</th>
+            <th>Especialidade</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -29,8 +29,8 @@ const ViewAppointments = () => {
           {appointments.map((appointment) => (
             <tr key={appointment.id}>
               <td>{new Date(appointment.date).toLocaleString()}</td>
-              <td>{appointment.barber.name}</td>
-              <td>{appointment.specialty}</td>
+              <td>{appointment.Barber.name}</td>
+              <td>{appointment.Barber.specialties.join(', ')}</td>
               <td>{appointment.status}</td>
             </tr>
           ))}

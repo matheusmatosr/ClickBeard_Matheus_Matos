@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { fetchBarbers, fetchSpecialties, createAppointment } from '../services/api';
+import { fetchBarbers, createAppointment } from '../services/api';
 
 const AppointmentForm = () => {
   const [barbers, setBarbers] = useState([]);
-  const [specialties, setSpecialties] = useState([]);
   const [selectedBarber, setSelectedBarber] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState([]);
+  const [availableSpecialties, setAvailableSpecialties] = useState([]);
 
   useEffect(() => {
-    const loadData = async () => {
+    const loadBarbers = async () => {
       const barbersData = await fetchBarbers();
-      const specialtiesData = await fetchSpecialties();
       setBarbers(barbersData);
-      setSpecialties(specialtiesData);
     };
-    loadData();
+    loadBarbers();
   }, []);
+
+  const handleBarberChange = (e) => {
+    const barberId = e.target.value;
+    const barber = barbers.find(b => b.id === parseInt(barberId));
+    setSelectedBarber(barberId);
+    setAvailableSpecialties(barber ? barber.specialties : []);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createAppointment({ barberId: selectedBarber, specialty: selectedSpecialty, date: appointmentDate });
+      await createAppointment({
+        barberId: selectedBarber,
+        clientId: 1,  // ajustar para o cliente autenticado
+        specialty: selectedSpecialty,
+        date: appointmentDate
+      });
       setMessage('Appointment booked successfully!');
     } catch (error) {
       setMessage('Error booking appointment.');
@@ -35,7 +45,7 @@ const AppointmentForm = () => {
       {message && <Alert variant="info">{message}</Alert>}
       <Form.Group className="mb-3">
         <Form.Label>Barbeiro</Form.Label>
-        <Form.Select value={selectedBarber} onChange={(e) => setSelectedBarber(e.target.value)}>
+        <Form.Select value={selectedBarber} onChange={handleBarberChange}>
           <option value="">Selecione o barbeiro</option>
           {barbers.map(barber => (
             <option key={barber.id} value={barber.id}>{barber.name}</option>
@@ -45,9 +55,9 @@ const AppointmentForm = () => {
       <Form.Group className="mb-3">
         <Form.Label>Especialidades</Form.Label>
         <Form.Select value={selectedSpecialty} onChange={(e) => setSelectedSpecialty(e.target.value)}>
-          <option value="">Selecioinar a especialidade</option>
-          {specialties.map(specialty => (
-            <option key={specialty.id} value={specialty.name}>{specialty.name}</option>
+          <option value="">Selecione a especialidade</option>
+          {availableSpecialties.map((specialty, index) => (
+            <option key={index} value={specialty}>{specialty}</option>
           ))}
         </Form.Select>
       </Form.Group>
