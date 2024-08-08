@@ -13,10 +13,10 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await loginClient({ email, password });
-      setMessage('Login successful!');
+      setMessage('Login efeituado com sucesso!');
       navigate('/'); // Redirect to home after successful login
     } catch (error) {
-      setMessage('Login failed. Please check your email and password.');
+      setMessage('Login falhou. Por favor cheque o seu email ou a senha.');
     }
   };
 

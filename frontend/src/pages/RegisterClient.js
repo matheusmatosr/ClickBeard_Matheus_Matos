@@ -12,10 +12,10 @@ const RegisterClient = () => {
     e.preventDefault();
     try {
       await registerClient({ name, email, password });
-      setMessage('Client registered successfully!');
+      setMessage('Cadastrado com successo!');
       // Redirect or update UI after successful registration
     } catch (error) {
-      setMessage('Error registering client.');
+      setMessage('Erro ao cadastrar');
     }
   };
 

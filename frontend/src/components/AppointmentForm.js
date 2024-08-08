@@ -34,9 +34,9 @@ const AppointmentForm = () => {
         specialty: selectedSpecialty,
         date: appointmentDate
       });
-      setMessage('Appointment booked successfully!');
+      setMessage('Barbeiro criado com sucesso!');
     } catch (error) {
-      setMessage('Error booking appointment.');
+      setMessage('Erro ao criar o barbeiro');
     }
   };
 
