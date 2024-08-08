@@ -15,7 +15,7 @@ Clone este repositório
 git clone https://github.com/matheusmatosr/ClickBeard_Matheus_Matos
 ```
 
-Abra o terminal e faça os seguintes códigos:
+Abra o terminal e rode os seguintes comandos:
 
 ### Backend
 1. Acesse o repositorio do backend:
