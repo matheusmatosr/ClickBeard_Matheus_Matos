@@ -7,7 +7,7 @@ const AppointmentForm = () => {
   const [selectedBarber, setSelectedBarber] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState('');
   const [availableSpecialties, setAvailableSpecialties] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const AppointmentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage('');
     try {
       await createAppointment({
         barberId: selectedBarber,
@@ -34,15 +35,17 @@ const AppointmentForm = () => {
         specialty: selectedSpecialty,
         date: appointmentDate
       });
-      setMessage('Barbeiro criado com sucesso!');
+      setMessage('Agendamento criado com sucesso!');
     } catch (error) {
-      setMessage('Erro ao criar o barbeiro');
+      setMessage('Erro ao criar o agendamento');
     }
   };
 
+  const alertVariant = typeof message === 'string' && message.startsWith('Erro') ? 'danger' : 'success';
+
   return (
     <Form onSubmit={handleSubmit}>
-      {message && <Alert variant="info">{message}</Alert>}
+      {message && <Alert variant={alertVariant}>{message}</Alert>}
       <Form.Group className="mb-3">
         <Form.Label>Barbeiro</Form.Label>
         <Form.Select value={selectedBarber} onChange={handleBarberChange}>
