@@ -33,3 +33,19 @@ export const fetchClients = async () => {
 export const createBarber = async (barberData) => {
   await axios.post(`${API_URL}/barbers`, barberData);
 };
+
+export const updateBarber = async (id, barberData) => {
+  await axios.put(`${API_URL}/barbers/${id}`, barberData);
+};
+
+export const deleteBarber = async (id) => {
+  await axios.delete(`${API_URL}/barbers/${id}`);
+};
+
+export const deleteClient = async (id) => {
+  await axios.delete(`${API_URL}/clients/${id}`);
+};
+
+export const deleteAppointment = async (id) => {
+  await axios.delete(`${API_URL}/appointments/${id}`);
+};
