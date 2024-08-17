@@ -76,3 +76,26 @@ exports.cancelAppointment = async (req, res) => {
     res.status(500).json({ error: 'Erro ao cancelar o agendamento' });
   }
 };
+
+exports.updateAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date, status, barberId, clientId } = req.body;
+
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+
+    appointment.date = date || appointment.date;
+    appointment.status = status || appointment.status;
+    appointment.barberId = barberId || appointment.barberId;
+    appointment.clientId = clientId || appointment.clientId;
+
+    await appointment.save();
+    res.status(200).json(appointment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error updating appointment' });
+  }
+};
